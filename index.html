@@ -36,47 +36,64 @@
       druhy = document.radiow1.tridaluxusu[1].checked;
       treti = document.radiow1.tridaluxusu[2].checked;
 
-      if (prvni) {document.getElementById("demo4").innerHTML ="1";}
-      if (druhy) {document.getElementById("demo4").innerHTML ="1.25";}
-      if (treti) {document.getElementById("demo4").innerHTML ="1.5";}
-     
+      if (prvni) { document.getElementById("demo4").innerHTML = "1"; }
+      if (druhy) { document.getElementById("demo4").innerHTML = "1.25"; }
+      if (treti) { document.getElementById("demo4").innerHTML = "1.5"; }
+
     }
 
-    function vyslednaCenaLetenekFce1(){
+    function vyslednaCenaLetenekFce1() {
       //500, 3000, 15000 nebo 30000
       cena1 = Number(document.roleta.castka.value);
       // 1- 10
       pocetLetenek = Number(hodnota2x = document.roleta.pocetw1.value);
       // 1 nebo 2
       zpatecniBoolean = document.zpatecnif1.zpatecnin1.checked;
-      if (zpatecniBoolean) {zpatecniNasobek = 2}
-      else {zpatecniNasobek = 1}
+      if (zpatecniBoolean) { zpatecniNasobek = 2 }
+      else { zpatecniNasobek = 1 }
 
       prvni = document.radiow1.tridaluxusu[0].checked;
       druhy = document.radiow1.tridaluxusu[1].checked;
       treti = document.radiow1.tridaluxusu[2].checked;
 
       var luxus = 1;
-      if (prvni) {luxus=1;}
-      if (druhy) {luxus=1.25;}
-      if (treti) {luxus=1.5;}
+      if (prvni) { luxus = 1; }
+      if (druhy) { luxus = 1.25; }
+      if (treti) { luxus = 1.5; }
 
 
 
-      vyslednaCena =String(cena1 * pocetLetenek * zpatecniNasobek * luxus);
-      document.getElementById("vyslednaID").value =vyslednaCena;
+      vyslednaCena = String(cena1 * pocetLetenek * zpatecniNasobek * luxus);
+      document.getElementById("vyslednaID").value = vyslednaCena;
       // console.log(vyslednaCena);
     }
 
-    function overeniRozpoctu () {
+    function overeniRozpoctu() {
       spocitanaCena = document.getElementById("vyslednaID").value;
-      rozpocet = document.getElementById("rozpocetID").value;
 
-      rozdil = spocitanaCena - rozpocet;
-      if (rozdil) { vysledekrozhodovani = ano; }
-      else { vysledekrozhodovani = ne;}
+      selektor1 = document.getElementById("rozpocetID");
+
+      rozpocet = selektor1.value;
+      console.log(spocitanaCena);
+      console.log(rozpocet);
+
+      rozdil = rozpocet - spocitanaCena;
+      if (rozdil >= 0) { vysledekrozhodovani = "ano"; }
+      else { vysledekrozhodovani = "ne"; }
 
       document.getElementById("anone").value = vysledekrozhodovani;
+
+
+    }
+
+    function overeniSpecialnichZnaku() {
+      selektor2 = document.getElementById("poznamka");
+      text1 = selektor2.value;
+      text2 = text1.slice(0, -1);
+
+      // if (text1.includes('?') || text1.includes('#') || text1.includes('§')  )
+      if (text1.includes('?') || text1.includes('#') || text1.includes('§')) { selektor2.value = text2; }
+
 
     }
 
@@ -116,20 +133,20 @@
   <br>
 
   <form name="zpatecnif1">
-  <input type="checkbox" name="zpatecnin1" onClick="checkboxfce1();">Zpáteční <br />
- 
-  </form> 
+    <input type="checkbox" name="zpatecnin1" onClick="checkboxfce1();">Zpáteční <br />
+
+  </form>
   <br>
   <br>
 
-  <form name="radiow1" onClick="radiofce1();" > 
+  <form name="radiow1" onClick="radiofce1();">
 
-  <input type="radio" name="tridaluxusu">
-  <label for="economy">Economy class - bez přirážky</label><br>
-  <input type="radio" name="tridaluxusu">
-  <label for="business">Business class - + 25 procent k ceně</label><br>
-  <input type="radio" name="tridaluxusu">
-  <label for="other">Royal class</label>
+    <input type="radio" name="tridaluxusu">
+    <label for="economy">Economy class - bez přirážky</label><br>
+    <input type="radio" name="tridaluxusu">
+    <label for="business">Business class - + 25 procent k ceně</label><br>
+    <input type="radio" name="tridaluxusu">
+    <label for="other">Royal class</label>
 
   </form>
   <br>
@@ -139,40 +156,40 @@
   <br>
   <br>
   <form name="vyslxx">
-  <label for="vysledna">Vysledná cena letenek:</label>
-  <input type="text" id="vyslednaID" name="vysledna" value="?"><br><br>
-  <label for="lname">Váš rozpočet na nákup letenek:</label>
-  <input type="text" id="rozpocet" name="rozpocet"><br><br>
-  <!-- <input type="submit" value="Ověřit"> <br> <br> -->
-  
-  <input type="button" value="Ověřit" onClick="overeniRozpoctu();"> <br> <br>
-  
-  <label for="vysledna">Je tvůj rozpočet dostatečný?</label>
-  <input type="text" id="anone" name="anone" value="ano"><br><br>
+    <label for="vysledna">Vysledná cena letenek:</label>
+    <input type="text" id="vyslednaID" name="vysledna" value=0><br><br>
+    <label for="lname">Váš rozpočet na nákup letenek:</label>
+    <input type="text" id="rozpocetID" name="rozpocet" value=0><br><br>
+
+
+    <input type="button" value="Ověřit" onClick="overeniRozpoctu();"> <br> <br>
+
+    <label for="vysledna">Je tvůj rozpočet dostatečný?</label>
+    <input type="text" id="anone" name="anone" value="ano"><br><br>
   </form>
 
-  
+
   <label for="poznamka">Poznámka:</label>
-  <textarea id="poznamka" name="poznamka" rows="10" cols="40">
+  <textarea id="poznamka" name="poznamka" rows="10" cols="40" onkeypress="overeniSpecialnichZnaku();">
 
-      </textarea>
+  </textarea>
   <br><br>
-  
- 
-  <!-- <script type="text/javascript" src="script.js"></script>  -->
-
-pro kontrolu:
- <br> 
- hodnota letenky:
-  <p id="demo1"></p>
-pocet letenek 
-  <p id="demo2"></p>
-zpatecni hodnota 2, jednosmerna hodnota 1:  
-  <p id="demo3"></p>
-trida luxusu - nasobek:
-  <p id="demo4"></p>
 
 
+  <div style="visibility: hidden;">
+
+    pro kontrolu:
+    <br>
+    hodnota letenky:
+    <p id="demo1"></p>
+    pocet letenek
+    <p id="demo2"></p>
+    zpatecni hodnota 2, jednosmerna hodnota 1:
+    <p id="demo3"></p>
+    trida luxusu - nasobek:
+    <p id="demo4"></p>
+
+  </div>
 
 </body>
 
