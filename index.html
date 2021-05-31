@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Letenky</title>
+
+  <script>
+    function roletafce() {
+
+      hodnota1x = document.roleta.castka.value;
+      document.getElementById("demo1").innerHTML = hodnota1x;
+    }
+
+    function roletafce2() {
+
+      hodnota2x = document.roleta.pocetw1.value;
+      document.getElementById("demo2").innerHTML = hodnota2x;
+    }
+
+    function checkboxfce1() {
+
+      hodnota3x = document.zpatecnif1.zpatecnin1.checked;
+
+      if (hodnota3x) { hodnota4x = "2"; }
+      else { hodnota4x = "1" }
+
+      document.getElementById("demo3").innerHTML = hodnota4x;
+    }
+
+    function radiofce1() {
+
+      prvni = document.radiow1.tridaluxusu[0].checked;
+      druhy = document.radiow1.tridaluxusu[1].checked;
+      treti = document.radiow1.tridaluxusu[2].checked;
+
+      if (prvni) {document.getElementById("demo4").innerHTML ="1";}
+      if (druhy) {document.getElementById("demo4").innerHTML ="1.25";}
+      if (treti) {document.getElementById("demo4").innerHTML ="1.5";}
+     
+    }
+
+    function vyslednaCenaLetenekFce1(){
+      //500, 3000, 15000 nebo 30000
+      cena1 = Number(document.roleta.castka.value);
+      // 1- 10
+      pocetLetenek = Number(hodnota2x = document.roleta.pocetw1.value);
+      // 1 nebo 2
+      zpatecniBoolean = document.zpatecnif1.zpatecnin1.checked;
+      if (zpatecniBoolean) {zpatecniNasobek = 2}
+      else {zpatecniNasobek = 1}
+
+      prvni = document.radiow1.tridaluxusu[0].checked;
+      druhy = document.radiow1.tridaluxusu[1].checked;
+      treti = document.radiow1.tridaluxusu[2].checked;
+
+      var luxus = 1;
+      if (prvni) {luxus=1;}
+      if (druhy) {luxus=1.25;}
+      if (treti) {luxus=1.5;}
+
+
+
+      vyslednaCena =String(cena1 * pocetLetenek * zpatecniNasobek * luxus);
+      document.getElementById("vyslednaID").value =vyslednaCena;
+      // console.log(vyslednaCena);
+    }
+
+    function overeniRozpoctu () {
+      spocitanaCena = document.getElementById("vyslednaID").value;
+      rozpocet = document.getElementById("rozpocetID").value;
+
+      rozdil = spocitanaCena - rozpocet;
+      if (rozdil) { vysledekrozhodovani = ano; }
+      else { vysledekrozhodovani = ne;}
+
+      document.getElementById("anone").value = vysledekrozhodovani;
+
+    }
+
+  </script>
+</head>
+
+<body>
+
+  <h1>Letenky</h1>
+
+  <h3>Vyber letenku</h3>
+  <form name="roleta">
+    <select name="castka" size="1" onClick="roletafce();">
+      <option value="500">Praha 500 Kč</option>
+      <option value="3000">Franfurkt 3000 Kč</option>
+      <option value="15000">New York 15000 Kč </option>
+      <option value="30000">Sydney 30000 Kč</option>
+    </select>
+    <span> poctet letenek: </span>
+    <select name="pocetw1" id="pocetw1" onClick="roletafce2();">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+
+    </select>
+  </form>
+
+  <br>
+
+  <br>
+
+  <form name="zpatecnif1">
+  <input type="checkbox" name="zpatecnin1" onClick="checkboxfce1();">Zpáteční <br />
+ 
+  </form> 
+  <br>
+  <br>
+
+  <form name="radiow1" onClick="radiofce1();" > 
+
+  <input type="radio" name="tridaluxusu">
+  <label for="economy">Economy class - bez přirážky</label><br>
+  <input type="radio" name="tridaluxusu">
+  <label for="business">Business class - + 25 procent k ceně</label><br>
+  <input type="radio" name="tridaluxusu">
+  <label for="other">Royal class</label>
+
+  </form>
+  <br>
+
+  <input type="button" value="Spočítej" onClick="vyslednaCenaLetenekFce1();">
+  <br>
+  <br>
+  <br>
+  <form name="vyslxx">
+  <label for="vysledna">Vysledná cena letenek:</label>
+  <input type="text" id="vyslednaID" name="vysledna" value="?"><br><br>
+  <label for="lname">Váš rozpočet na nákup letenek:</label>
+  <input type="text" id="rozpocet" name="rozpocet"><br><br>
+  <!-- <input type="submit" value="Ověřit"> <br> <br> -->
+  
+  <input type="button" value="Ověřit" onClick="overeniRozpoctu();"> <br> <br>
+  
+  <label for="vysledna">Je tvůj rozpočet dostatečný?</label>
+  <input type="text" id="anone" name="anone" value="ano"><br><br>
+  </form>
+
+  
+  <label for="poznamka">Poznámka:</label>
+  <textarea id="poznamka" name="poznamka" rows="10" cols="40">
+
+      </textarea>
+  <br><br>
+  
+ 
+  <!-- <script type="text/javascript" src="script.js"></script>  -->
+
+pro kontrolu:
+ <br> 
+ hodnota letenky:
+  <p id="demo1"></p>
+pocet letenek 
+  <p id="demo2"></p>
+zpatecni hodnota 2, jednosmerna hodnota 1:  
+  <p id="demo3"></p>
+trida luxusu - nasobek:
+  <p id="demo4"></p>
+
+
+
+</body>
+
+</html>
